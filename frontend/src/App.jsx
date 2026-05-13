@@ -28,8 +28,11 @@ export default function App() {
     setPhase(PHASES.LOADING);
     setError(null);
 
+    const sessionId = `session-${Date.now()}`;
+
     try {
-      const res = await fetch("http://emotional-flower.onrender.com/api/analyze", {
+      // เปลี่ยนจาก http เป็น https
+      const res = await fetch("https://emotional-flower.onrender.com/api/analyze", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,6 +45,7 @@ export default function App() {
       setResult(data.result);
       setPhase(PHASES.RESULT);
     } catch (e) {
+      console.error("เกิดข้อผิดพลาด:", e); // เพิ่มบรรทัดนี้เพื่อดู Error จริงใน Console
       setError("ไม่สามารถเชื่อมต่อ server ได้ กรุณาตรวจสอบ backend");
       setPhase(PHASES.QUIZ);
     }
