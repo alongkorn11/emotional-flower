@@ -29,13 +29,12 @@ export default function App() {
     setError(null);
 
     try {
-      const res = await fetch("[https://emotional-flower.onrender.com/api/analyze]", {
+      const res = await fetch("http://emotional-flower.onrender.com/api/analyze", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          answers,
-          sessionId: `session_${Date.now()}`,
-        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ answers, sessionId }),
       });
 
       if (!res.ok) throw new Error("Server error");
