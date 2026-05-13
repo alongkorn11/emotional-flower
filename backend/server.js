@@ -9,13 +9,17 @@ const server = http.createServer(app);
 // ─── Socket.IO Setup ─────────────────────────────────────────────────────────
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: ["http://emotionalflower.runasp.net", "https://emotionalflower.runasp.net"], 
     methods: ["GET", "POST"],
+    credentials: true
   },
 });
 
-app.use(cors());
-app.use(express.json());
+app.use(cors({
+  origin: ["http://emotionalflower.runasp.net", "https://emotionalflower.runasp.net"],
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
+}));
 
 // ─── Flower Analysis Logic ────────────────────────────────────────────────────
 const FLOWER_PROFILES = {
