@@ -6,6 +6,9 @@ const cors = require("cors");
 const app = express();
 const server = http.createServer(app);
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // ─── Socket.IO Setup ─────────────────────────────────────────────────────────
 const io = new Server(server, {
   cors: {
